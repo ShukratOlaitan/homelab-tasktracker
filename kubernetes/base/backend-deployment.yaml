@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasktracker-backend
+  namespace: tasktracker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tasktracker-backend
+  template:
+    metadata:
+      labels:
+        app: tasktracker-backend
+    spec:
+      containers:
+        - name: backend
+          image: shukratolaitan/tasktracker-backend:0.2
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DATABASE_URL
+              value: postgresql://taskuser:taskpass@postgres:5432/tasktracker
