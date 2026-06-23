@@ -20,4 +20,7 @@ spec:
             - containerPort: 8000
           env:
             - name: DATABASE_URL
-              value: postgresql://taskuser:taskpass@postgres:5432/tasktracker
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: DATABASE_URL
