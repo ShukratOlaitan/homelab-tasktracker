@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tasktracker-backend
+  namespace: tasktracker
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: tasktracker.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: tasktracker-backend
+                port:
+                  number: 8000
